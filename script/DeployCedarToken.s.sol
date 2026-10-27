@@ -7,9 +7,11 @@ import {CedarToken} from "src/CedarToken.sol";
 contract DeployCedarToken is Script {
     uint256 public INITIAL_SUPPLY = 1000 ether;
 
-    function run() external {
+    function run() external returns (CedarToken) {
         vm.startBroadcast();
-        new CedarToken(INITIAL_SUPPLY);
+        CedarToken cedarToken = new CedarToken(INITIAL_SUPPLY);
         vm.stopBroadcast();
+
+        return cedarToken;
     }
 }
