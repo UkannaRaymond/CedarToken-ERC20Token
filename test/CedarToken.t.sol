@@ -156,17 +156,11 @@ contract CedarTokenTest is Test {
 
         assertTrue(success);
 
-        assertEq(
-            cedarToken.balanceOf(jacob),
-            STARTING_BALANCE - transferAmount
-        );
+        assertEq(cedarToken.balanceOf(jacob), STARTING_BALANCE - transferAmount);
 
         assertEq(cedarToken.balanceOf(ray), transferAmount);
 
-        assertEq(
-            cedarToken.allowance(jacob, spender),
-            allowanceAmount - transferAmount
-        );
+        assertEq(cedarToken.allowance(jacob, spender), allowanceAmount - transferAmount);
     }
 
     function testTransferFromFailsWithoutAllowance() public {
@@ -219,10 +213,7 @@ contract CedarTokenTest is Test {
         assertEq(cedarToken.allowance(jacob, spender), amount);
     }
 
-    function testFuzzTransferFrom(
-        uint256 allowanceAmount,
-        uint256 transferAmount
-    ) public {
+    function testFuzzTransferFrom(uint256 allowanceAmount, uint256 transferAmount) public {
         allowanceAmount = bound(allowanceAmount, 0, STARTING_BALANCE);
 
         transferAmount = bound(transferAmount, 0, allowanceAmount);
@@ -233,16 +224,10 @@ contract CedarTokenTest is Test {
         vm.prank(spender);
         cedarToken.transferFrom(jacob, ray, transferAmount);
 
-        assertEq(
-            cedarToken.balanceOf(jacob),
-            STARTING_BALANCE - transferAmount
-        );
+        assertEq(cedarToken.balanceOf(jacob), STARTING_BALANCE - transferAmount);
 
         assertEq(cedarToken.balanceOf(ray), transferAmount);
 
-        assertEq(
-            cedarToken.allowance(jacob, spender),
-            allowanceAmount - transferAmount
-        );
+        assertEq(cedarToken.allowance(jacob, spender), allowanceAmount - transferAmount);
     }
 }
